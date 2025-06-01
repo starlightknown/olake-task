@@ -1,6 +1,6 @@
 # PostgreSQL to Apache Iceberg Integration with Olake
 
-This document outlines the process of setting up a data pipeline to sync data from PostgreSQL to Apache Iceberg tables, along with troubleshooting steps for common issues.
+This outlines the process of setting up a data pipeline to sync data from PostgreSQL to Apache Iceberg tables using JDBC catalog, along with troubleshooting steps for common issues.
 
 ## Prerequisites
 
@@ -125,7 +125,7 @@ docker run -p 9000:9000 -p 9001:9001 -e "MINIO_ROOT_USER=admin" -e "MINIO_ROOT_P
 
 ## Step 4: Querying Iceberg Tables with Spark SQL
 
-1. Start Spark SQL with Iceberg support
+1. Start Spark SQL
 
 2. Check available catalogs:
 ```sql
@@ -147,10 +147,10 @@ SHOW TABLES IN iceberg;
 SELECT * FROM olake_iceberg.iceberg.endpoint_statistics LIMIT 10;
 ```
 
+<img width="662" alt="image" src="https://github.com/user-attachments/assets/36365d24-cd27-44fb-a928-42a3ba3ce6d1" />
+
+
 ## Challenges and Solutions
-
-
-
 
 ### Challenge 1: wal2json Plugin Issues
 
@@ -195,36 +195,7 @@ SELECT * FROM olake_iceberg.iceberg.endpoint_statistics LIMIT 10;
      ```
    - After installation, ensure PostgreSQL loads the plugin by modifying the correct postgresql.conf:
 
-### Challenge 3: Stream Discovery Issues
-
-**Problem:** The `olake discover` command fails or doesn't show all expected tables.
-
-**Cause:** Connection issues, permission problems, or replication slot configuration issues.
-
-**Solution:**
-1. Verify database connection works:
-   ```bash
-   psql -h localhost -U iceberg -d iceberg
-   ```
-
-2. Check permissions:
-   ```sql
-   -- Ensure the user has necessary permissions
-   GRANT USAGE ON SCHEMA public TO iceberg;
-   GRANT SELECT ON ALL TABLES IN SCHEMA public TO iceberg;
-   ```
-
-3. Verify replication slot status:
-   ```sql
-   SELECT * FROM pg_replication_slots;
-   ```
-
-4. Try running discovery with debug logs:
-   ```bash
-   olake discover --config-dir ./olake_config --log-level debug
-   ```
-
-### Challenge 4: Sync Process Errors
+### Challenge 3: Sync Process Errors
 
 **Problem:** Sync process fails or gets stuck.
 
@@ -235,23 +206,3 @@ SELECT * FROM olake_iceberg.iceberg.endpoint_statistics LIMIT 10;
 2. Verify PostgreSQL is accepting connections
 3. Ensure MinIO/S3 storage is accessible
 4. For permission issues, make sure the PostgreSQL user has the proper privileges
-5. Try running with debug logging:
-   ```bash
-   olake sync --config-dir ./olake_config --log-level debug
-   ```
-
-## Conclusion
-
-The PostgreSQL to Iceberg integration pipeline using Olake provides an effective way to sync data from a transactional database to an analytics-optimized storage format. When properly configured, it enables:
-
-1. Real-time CDC from PostgreSQL using wal2json
-2. Storage in the Apache Iceberg format on S3
-3. SQL access to the data via Spark SQL
-
-Key points for successful implementation:
-- Ensure PostgreSQL is properly configured for logical replication
-- Verify wal2json plugin is installed and properly configured
-- Verify S3 storage is accessible with correct credentials
-- Use the correct catalog and schema references in queries
-- Check sync logs for any errors or warnings
-- Confirm tables are actually synced before attempting to query them
