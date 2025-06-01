@@ -1,0 +1,37 @@
+{"level":"info","time":"2025-06-01T06:51:24Z","message":"System has 7GB RAM, setting iceberg writer batch size to 209715200 bytes"}
+{"level":"info","time":"2025-06-01T06:51:25Z","message":"Running sync with state: null"}
+{"level":"info","message":"S3 credentials not explicitly provided for custom endpoint. Ensure the service supports anonymous access or credentials are available through other means","time":"2025-06-01T06:51:25Z"}
+{"level":"info","time":"2025-06-01T06:51:25Z","message":"Iceberg JAR file found in base directory: /home/debezium-server-iceberg-sink.jar"}
+{"level":"info","time":"2025-06-01T06:51:25Z","message":"Connected to new iceberg writer on port 50051 for stream check_01JWN44TJ12ZT137HCPWGRWRGF, configHash check_01JWN44TJ12ZT137HCPWGRWRGF-check-false"}
+{"level":"info","message":"[Java-Iceberg:50051] 06:51:25.478 [main] INFO  io.debezium.server.iceberg.OlakeRpcServer - Logs will be output to console only","time":"2025-06-01T06:51:25Z"}
+{"level":"error","time":"2025-06-01T06:51:25Z","message":"[Java-Iceberg:50051] Exception in thread \"main\" org.apache.iceberg.exceptions.RESTException: Received a success response code of 200, but failed to parse response body into ConfigResponse"}
+{"level":"error","time":"2025-06-01T06:51:25Z","message":"[Java-Iceberg:50051] \tat org.apache.iceberg.rest.HTTPClient.execute(HTTPClient.java:339)"}
+{"level":"error","time":"2025-06-01T06:51:25Z","message":"[Java-Iceberg:50051] \tat org.apache.iceberg.rest.HTTPClient.execute(HTTPClient.java:262)"}
+{"level":"error","time":"2025-06-01T06:51:25Z","message":"[Java-Iceberg:50051] \tat org.apache.iceberg.rest.HTTPClient.get(HTTPClient.java:358)"}
+{"level":"error","time":"2025-06-01T06:51:25Z","message":"[Java-Iceberg:50051] \tat org.apache.iceberg.rest.RESTSessionCatalog.fetchConfig(RESTSessionCatalog.java:1045)"}
+{"level":"error","time":"2025-06-01T06:51:25Z","message":"[Java-Iceberg:50051] \tat org.apache.iceberg.rest.RESTSessionCatalog.initialize(RESTSessionCatalog.java:254)"}
+{"level":"error","time":"2025-06-01T06:51:25Z","message":"[Java-Iceberg:50051] \tat org.apache.iceberg.rest.RESTCatalog.initialize(RESTCatalog.java:78)"}
+{"level":"error","time":"2025-06-01T06:51:25Z","message":"[Java-Iceberg:50051] \tat org.apache.iceberg.CatalogUtil.loadCatalog(CatalogUtil.java:274)"}
+{"level":"error","time":"2025-06-01T06:51:25Z","message":"[Java-Iceberg:50051] \tat org.apache.iceberg.CatalogUtil.buildIcebergCatalog(CatalogUtil.java:328)"}
+{"level":"error","time":"2025-06-01T06:51:25Z","message":"[Java-Iceberg:50051] \tat io.debezium.server.iceberg.OlakeRpcServer.main(OlakeRpcServer.java:84)"}
+{"level":"error","time":"2025-06-01T06:51:25Z","message":"[Java-Iceberg:50051] Caused by: com.fasterxml.jackson.core.JsonParseException: Unexpected character ('<' (code 60)): expected a valid value (JSON String, Number, Array, Object or token 'null', 'true' or 'false')"}
+{"level":"error","time":"2025-06-01T06:51:25Z","message":"[Java-Iceberg:50051]  at [Source: (String)\"<!doctype html>"}
+{"level":"error","time":"2025-06-01T06:51:25Z","message":"[Java-Iceberg:50051] <html lang=\"en\">"}
+{"level":"error","time":"2025-06-01T06:51:25Z","message":"[Java-Iceberg:50051]   <head>"}
+{"level":"error","time":"2025-06-01T06:51:25Z","message":"[Java-Iceberg:50051]     <link rel=\"preconnect\" href=\"https://fonts.gstatic.com/\" crossorigin=\"anonymous\">"}
+{"level":"error","time":"2025-06-01T06:51:25Z","message":"[Java-Iceberg:50051]     <link rel=\"preload\" as=\"style\" onload=\"this.rel='stylesheet'\" href=\"https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap\">"}
+{"level":"error","time":"2025-06-01T06:51:25Z","message":"[Java-Iceberg:50051]     <link rel=\"preload\" as=\"font\" type=\"font/eot\" href=\"/ui/assets/materialdesignicons-webfont-CSr8KVlo.eot\" crossorigin=\"anonymous\">"}
+{"level":"error","time":"2025-06-01T06:51:25Z","message":"[Java-Iceberg:50051]     <link rel=\"preload\" as=\"font\" type=\"font/woff2\" href=\"/ui/assets/mater\"[truncated 741 chars]; line: 1, column: 2]"}
+{"level":"error","time":"2025-06-01T06:51:25Z","message":"[Java-Iceberg:50051] \tat com.fasterxml.jackson.core.JsonParser._constructError(JsonParser.java:2477)"}
+{"level":"error","time":"2025-06-01T06:51:25Z","message":"[Java-Iceberg:50051] \tat com.fasterxml.jackson.core.base.ParserMinimalBase._reportError(ParserMinimalBase.java:750)"}
+{"level":"error","time":"2025-06-01T06:51:25Z","message":"[Java-Iceberg:50051] \tat com.fasterxml.jackson.core.base.ParserMinimalBase._reportUnexpectedChar(ParserMinimalBase.java:674)"}
+{"level":"error","time":"2025-06-01T06:51:25Z","message":"[Java-Iceberg:50051] \tat com.fasterxml.jackson.core.json.ReaderBasedJsonParser._handleOddValue(ReaderBasedJsonParser.java:2085)"}
+{"level":"error","time":"2025-06-01T06:51:25Z","message":"[Java-Iceberg:50051] \tat com.fasterxml.jackson.core.json.ReaderBasedJsonParser.nextToken(ReaderBasedJsonParser.java:808)"}
+{"level":"error","time":"2025-06-01T06:51:25Z","message":"[Java-Iceberg:50051] \tat com.fasterxml.jackson.databind.ObjectMapper._initForReading(ObjectMapper.java:4986)"}
+{"level":"error","time":"2025-06-01T06:51:25Z","message":"[Java-Iceberg:50051] \tat com.fasterxml.jackson.databind.ObjectMapper._readMapAndClose(ObjectMapper.java:4892)"}
+{"level":"error","time":"2025-06-01T06:51:25Z","message":"[Java-Iceberg:50051] \tat com.fasterxml.jackson.databind.ObjectMapper.readValue(ObjectMapper.java:3846)"}
+{"level":"error","time":"2025-06-01T06:51:25Z","message":"[Java-Iceberg:50051] \tat com.fasterxml.jackson.databind.ObjectMapper.readValue(ObjectMapper.java:3814)"}
+{"level":"error","time":"2025-06-01T06:51:25Z","message":"[Java-Iceberg:50051] \tat org.apache.iceberg.rest.HTTPClient.execute(HTTPClient.java:333)"}
+{"level":"error","time":"2025-06-01T06:51:25Z","message":"[Java-Iceberg:50051] \t... 8 more"}
+{"level":"info","time":"2025-06-01T06:51:55Z","message":"Shutting down Iceberg server on port 50051"}
+{"level":"fatal","time":"2025-06-01T06:51:55Z","message":"failed to test destination: error sending record to Iceberg RPC Server: rpc error: code = DeadlineExceeded desc = latest balancer error: connection error: desc = \"transport: Error while dialing: dial tcp 127.0.0.1:50051: connect: connection refused\""}

@@ -1,0 +1,2 @@
+{"level":"info","time":"2025-06-01T06:34:15Z","message":"System has 7GB RAM, setting iceberg writer batch size to 209715200 bytes"}
+{"level":"fatal","time":"2025-06-01T06:34:15Z","message":"failed to ping database: failed to connect to `host=localhost user=iceberg database=iceberg`: dial error (dial tcp [::1]:5432: connect: connection refused)"}

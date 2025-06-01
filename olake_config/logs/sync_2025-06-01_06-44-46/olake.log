@@ -1,0 +1,20 @@
+{"level":"info","time":"2025-06-01T06:44:46Z","message":"System has 7GB RAM, setting iceberg writer batch size to 209715200 bytes"}
+{"level":"info","time":"2025-06-01T06:44:46Z","message":"Running sync with state: null"}
+{"level":"warn","time":"2025-06-01T06:44:46Z","message":"aws_region not explicitly provided, will attempt to use region from environment variables or AWS config/credentials file"}
+{"level":"info","message":"AWS credentials not explicitly provided, will use default credential chain (environment variables, AWS config/credentials file, or instance metadata service)","time":"2025-06-01T06:44:46Z"}
+{"level":"info","time":"2025-06-01T06:44:46Z","message":"Iceberg JAR file found in base directory: /home/debezium-server-iceberg-sink.jar"}
+{"level":"info","time":"2025-06-01T06:44:46Z","message":"Connected to new iceberg writer on port 50051 for stream check_01JWN3RMZKN239PM4MZD97R3JK, configHash check_01JWN3RMZKN239PM4MZD97R3JK-check-false"}
+{"level":"info","message":"[Java-Iceberg:50051] 06:44:46.558 [main] INFO  io.debezium.server.iceberg.OlakeRpcServer - Logs will be output to console only","time":"2025-06-01T06:44:46Z"}
+{"level":"error","time":"2025-06-01T06:44:46Z","message":"[Java-Iceberg:50051] Exception in thread \"main\" org.apache.iceberg.exceptions.RESTException: Unable to process: Warehouse warehouse not found"}
+{"level":"error","time":"2025-06-01T06:44:46Z","message":"[Java-Iceberg:50051] \tat org.apache.iceberg.rest.ErrorHandlers$DefaultErrorHandler.accept(ErrorHandlers.java:224)"}
+{"level":"error","time":"2025-06-01T06:44:46Z","message":"[Java-Iceberg:50051] \tat org.apache.iceberg.rest.ErrorHandlers$DefaultErrorHandler.accept(ErrorHandlers.java:188)"}
+{"level":"error","time":"2025-06-01T06:44:46Z","message":"[Java-Iceberg:50051] \tat org.apache.iceberg.rest.HTTPClient.throwFailure(HTTPClient.java:211)"}
+{"level":"error","time":"2025-06-01T06:44:46Z","message":"[Java-Iceberg:50051] \tat org.apache.iceberg.rest.HTTPClient.execute(HTTPClient.java:323)"}
+{"level":"error","time":"2025-06-01T06:44:46Z","message":"[Java-Iceberg:50051] \tat org.apache.iceberg.rest.HTTPClient.execute(HTTPClient.java:262)"}
+{"level":"error","time":"2025-06-01T06:44:46Z","message":"[Java-Iceberg:50051] \tat org.apache.iceberg.rest.HTTPClient.get(HTTPClient.java:358)"}
+{"level":"error","time":"2025-06-01T06:44:46Z","message":"[Java-Iceberg:50051] \tat org.apache.iceberg.rest.RESTSessionCatalog.fetchConfig(RESTSessionCatalog.java:1045)"}
+{"level":"error","time":"2025-06-01T06:44:46Z","message":"[Java-Iceberg:50051] \tat org.apache.iceberg.rest.RESTSessionCatalog.initialize(RESTSessionCatalog.java:254)"}
+{"level":"error","time":"2025-06-01T06:44:46Z","message":"[Java-Iceberg:50051] \tat org.apache.iceberg.rest.RESTCatalog.initialize(RESTCatalog.java:78)"}
+{"level":"error","time":"2025-06-01T06:44:46Z","message":"[Java-Iceberg:50051] \tat org.apache.iceberg.CatalogUtil.loadCatalog(CatalogUtil.java:274)"}
+{"level":"error","time":"2025-06-01T06:44:46Z","message":"[Java-Iceberg:50051] \tat org.apache.iceberg.CatalogUtil.buildIcebergCatalog(CatalogUtil.java:328)"}
+{"level":"error","time":"2025-06-01T06:44:46Z","message":"[Java-Iceberg:50051] \tat io.debezium.server.iceberg.OlakeRpcServer.main(OlakeRpcServer.java:84)"}
