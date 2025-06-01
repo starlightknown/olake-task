@@ -125,7 +125,7 @@ docker run -p 9000:9000 -p 9001:9001 -e "MINIO_ROOT_USER=admin" -e "MINIO_ROOT_P
 
 ## Step 4: Querying Iceberg Tables with Spark SQL
 
-1. Start Spark SQL with Iceberg support
+1. Start Spark SQL
 
 2. Check available catalogs:
 ```sql
@@ -148,9 +148,6 @@ SELECT * FROM olake_iceberg.iceberg.endpoint_statistics LIMIT 10;
 ```
 
 ## Challenges and Solutions
-
-
-
 
 ### Challenge 1: wal2json Plugin Issues
 
@@ -239,19 +236,3 @@ SELECT * FROM olake_iceberg.iceberg.endpoint_statistics LIMIT 10;
    ```bash
    olake sync --config-dir ./olake_config --log-level debug
    ```
-
-## Conclusion
-
-The PostgreSQL to Iceberg integration pipeline using Olake provides an effective way to sync data from a transactional database to an analytics-optimized storage format. When properly configured, it enables:
-
-1. Real-time CDC from PostgreSQL using wal2json
-2. Storage in the Apache Iceberg format on S3
-3. SQL access to the data via Spark SQL
-
-Key points for successful implementation:
-- Ensure PostgreSQL is properly configured for logical replication
-- Verify wal2json plugin is installed and properly configured
-- Verify S3 storage is accessible with correct credentials
-- Use the correct catalog and schema references in queries
-- Check sync logs for any errors or warnings
-- Confirm tables are actually synced before attempting to query them
