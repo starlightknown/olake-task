@@ -8,8 +8,9 @@ This document outlines the process of setting up a data pipeline to sync data fr
 - PostgreSQL database
 - Apache Iceberg
 - Olake for CDC (Change Data Capture)
-- MinIO or other S3-compatible storage
+- MinIO or lakehouse
 - Spark SQL for querying
+- wal2json logical decoding plugin for PostgreSQL
 
 ## Step 1: Setting Up PostgreSQL Source
 
@@ -19,18 +20,45 @@ This document outlines the process of setting up a data pipeline to sync data fr
 docker run --name postgres-db -e POSTGRES_PASSWORD=password -e POSTGRES_USER=iceberg -e POSTGRES_DB=iceberg -p 5432:5432 -d postgres:13
 ```
 
-2. Configure PostgreSQL for CDC:
-   - Edit `postgresql.conf` to enable logical replication:
+2. Install wal2json plugin (if not already included in your PostgreSQL image):
+
+   a. For Debian/Ubuntu-based PostgreSQL:
+   ```bash
+   apt-get update
+   apt-get install -y postgresql-13-wal2json
+   ```
+
+   b. For RHEL/CentOS-based PostgreSQL:
+   ```bash
+   yum install -y postgresql13-wal2json
+   ```
+
+   c. From source:
+   ```bash
+   git clone https://github.com/eulerto/wal2json.git
+   cd wal2json
+   make
+   make install
+   ```
+
+3. Configure PostgreSQL for CDC:
+   - Edit `postgresql.conf` to enable logical replication and wal2json:
    ```
    wal_level = logical
    max_wal_senders = 10
    max_replication_slots = 10
+   shared_preload_libraries = 'wal2json'
    ```
    - Restart PostgreSQL to apply changes
 
-3. Create a replication slot:
+4. Create a replication slot using wal2json:
 ```sql
-SELECT pg_create_logical_replication_slot('postgres_slot', 'pgoutput');
+SELECT pg_create_logical_replication_slot('postgres_slot', 'wal2json');
+```
+
+5. Verify the wal2json plugin is properly installed:
+```sql
+SELECT * FROM pg_replication_slots;
 ```
 
 ## Step 2: Setting Up the S3 Storage
@@ -50,7 +78,7 @@ docker run -p 9000:9000 -p 9001:9001 -e "MINIO_ROOT_USER=admin" -e "MINIO_ROOT_P
 
 1. Create the necessary configuration files in `olake_config/`:
 
-   - `source.json` - PostgreSQL connection details:
+   - `source.json` - PostgreSQL connection details with wal2json:
    ```json
    {
        "host": "localhost",
@@ -191,16 +219,40 @@ To auto-migrate the database's schema and enable view support, set jdbc.schema-v
 
 **Solution:** This is normal behavior when there are no changes to sync. The process will wait for new changes and terminate after the configured idle timeout. To test, insert or update data in PostgreSQL and run the sync again.
 
+### Challenge 4: wal2json Plugin Issues
+
+**Problem:** CDC process fails with errors related to wal2json.
+
+**Cause:** The wal2json plugin may not be properly installed or configured.
+
+**Solution:**
+1. Verify wal2json is properly installed:
+   ```sql
+   SELECT * FROM pg_available_extensions WHERE name = 'wal2json';
+   ```
+
+2. Check if the replication slot was created successfully:
+   ```sql
+   SELECT * FROM pg_replication_slots WHERE plugin = 'wal2json';
+   ```
+
+3. If using Docker, ensure the PostgreSQL image includes wal2json or mount a custom postgresql.conf:
+   ```bash
+   docker run -v /path/to/custom/postgresql.conf:/etc/postgresql/postgresql.conf -e POSTGRES_PASSWORD=password -e POSTGRES_USER=iceberg -e POSTGRES_DB=iceberg -p 5432:5432 -d postgres:13
+   ```
+
 ## Conclusion
 
 The PostgreSQL to Iceberg integration pipeline using Olake provides an effective way to sync data from a transactional database to an analytics-optimized storage format. When properly configured, it enables:
 
-1. Real-time CDC from PostgreSQL
+1. Real-time CDC from PostgreSQL using wal2json
 2. Storage in the Apache Iceberg format on S3
 3. SQL access to the data via Spark SQL
 
 Key points for successful implementation:
 - Ensure PostgreSQL is properly configured for logical replication
+- Verify wal2json plugin is installed and properly configured
+- Create appropriate publications for the tables you want to replicate
 - Verify S3 storage is accessible with correct credentials
 - Use the correct catalog and schema references in queries
 - Check sync logs for any errors or warnings
