@@ -1,6 +1,6 @@
 # PostgreSQL to Apache Iceberg Integration with Olake
 
-This document outlines the process of setting up a data pipeline to sync data from PostgreSQL to Apache Iceberg tables, along with troubleshooting steps for common issues.
+This outlines the process of setting up a data pipeline to sync data from PostgreSQL to Apache Iceberg tables using JDBC catalog, along with troubleshooting steps for common issues.
 
 ## Prerequisites
 
