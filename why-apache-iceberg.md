@@ -2,17 +2,15 @@
 
 In today's world of artificial intelligence and machine learning, data has become the new gold. But here's the challenge: how do you efficiently organize, access, and manage such massive datasets?
 
-Enter Apache Iceberg – an open-source table format that's changing the game for data engineers and analysts everywhere. But to truly appreciate why Iceberg matters, we need to understand the evolution of data management challenges over the past twenty years.
-
-## The Data management journey
+Here comes Apache Iceberg, an open-source table format that's changing the game for data engineers and analysts everywhere. But to truly appreciate why Iceberg matters, we need to understand the evolution of data management challenges over the past twenty years.
 
 Imagine trying to organize the world's largest library. Now imagine that library doubles in size every few years, with books in different formats, languages, and organizational systems. That's essentially what's happened with data.
 
-### The early days: When Hadoop changed everything
+### The early days: When Data Lake i.e, Hadoop changed everything
 
 Back in the early 2000s, the internet was growing exponentially, and organizations suddenly found themselves drowning in data. A single server couldn't handle it anymore.
 
-In 2005, Apache Hadoop arrived as the first major solution for this data explosion. Hadoop introduced two revolutionary concepts:
+In 2005, Apache Hadoop became the first major solution for this data explosion. Hadoop introduced two new concepts:
 
 * **HDFS (Hadoop Distributed File System)**: A way to store massive amounts of data across multiple machines
 * **MapReduce**: A programming model to process all this distributed data
@@ -25,14 +23,12 @@ By 2008, this problem became evident enough that Apache Hive was created. Hive b
 
 Hive also introduced another critical innovation: the Hive Metastore. Think of this as the library's card catalog – a centralized system that kept track of what data was stored where. This made querying more efficient since the system knew which "shelves" to look at for specific information.
 
-This worked beautifully for a while. Organizations built massive data warehouses on Hadoop and Hive, and all seemed well.
-
-### The Cloud era challenge
+This worked wonderfully for a while. Organizations built massive data warehouses on Hadoop and Hive, and all seemed well.
 
 Then came the 2010s, and two major shifts occurred:
 
-1. **Cloud storage became dominant**: Companies moved from on-premises HDFS to cloud storage like Amazon S3, which was cheaper and more scalable
-2. **Real-time analytics became essential**: Batch processing wasn't enough; businesses wanted immediate insights
+1. Companies moved from on-premises HDFS to cloud storage like Amazon S3, which was cheaper and more scalable
+2. Batch processing wasn't enough; businesses wanted immediate insights
 
 These changes created three major challenges:
 
@@ -40,7 +36,7 @@ These changes created three major challenges:
 * Hive's query performance wasn't fast enough for real-time analytics
 * Organizations couldn't just abandon their existing Hadoop investments
 
-The industry needed something that could bridge the old and new worlds – something that could work with both cloud storage and HDFS, support both batch and real-time processing, and integrate with existing data infrastructure.
+The industry needed something that could bridge the old and new worlds, something that could work with both cloud storage and HDFS, support both batch and real-time processing, and integrate with existing data infrastructure.
 
 ## The Iceberg innovation
 
@@ -52,7 +48,7 @@ Iceberg's brilliance lies in how it organizes information about your data. Unlik
 
 Going back to our library example: If Hive's metastore was like knowing which shelf had history books, Iceberg's metadata is like having a detailed inventory system that knows exactly which page of which book contains the specific information you're looking for.
 
-This detailed metadata approach unlocks several game-changing capabilities:
+This detailed metadata approach unlocks several capabilities:
 
 ### 1. Storage independence
 
@@ -113,7 +109,7 @@ As we move deeper into the AI revolution, data management becomes even more crit
 
 Iceberg is uniquely positioned for this era because:
 
-1. **It scales horizontally**: As data volumes grow, Iceberg's architecture remains efficient
-2. **It enables data quality**: Version control and schema enforcement ensure clean training data
-3. **It supports diverse access patterns**: Different AI workloads can access the same data efficiently
-4. **It provides governance**: Time travel and metadata make data lineage and compliance easier
+1. As data volumes grow, Iceberg's architecture remains efficient
+2. Version control and schema enforcement ensure clean training data
+3. Different AI workloads can access the same data efficiently
+4. Time travel and metadata make data lineage and compliance easier
